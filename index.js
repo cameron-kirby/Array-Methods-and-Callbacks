@@ -267,3 +267,47 @@ console.log(getAverageGoals(fifaData));
 /// STRETCH 🥅 //
 
 /* Use the space below to work on any stretch goals of your chosing as listed in the README file. */
+
+
+// Strech Task 1
+
+function searchWorldCup(data, initials){
+    let appearances = 0;
+    let cupGames = data.filter(function(item){ // Filter World Cup Games
+        return item["Stage"] === "Final";
+    });
+
+    appearances = cupGames.reduce(function(accumulator,item){
+        if(item["Home Team Initials"] === initials || item["Away Team Initials"] === initials) {
+            return accumulator + 1;
+        } else {
+            return accumulator;
+        }
+    }, 0);
+
+    return appearances;
+}
+
+console.log(searchWorldCup(fifaData, "ITA"));
+
+function goalsSince1930(data, initials){
+    let appearances = 0;
+    let cupGames = data.filter(function(item){ // Filter World Cup Games
+        return item["Stage"] === "Final";
+    });
+    let cupGamesAfter1930 = cupGames.filter(function(item){
+        return item["Year"] > 1930;
+    });
+
+    appearances = cupGamesAfter1930.reduce(function(accumulator,item){
+        if(item["Home Team Initials"] === initials || item["Away Team Initials"] === initials) {
+            return accumulator + 1;
+        } else {
+            return accumulator;
+        }
+    }, 0);
+
+    return appearances;
+}
+
+console.log(goalsSince1930(fifaData, "GER"));
